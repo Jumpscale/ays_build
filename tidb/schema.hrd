@@ -1,0 +1,1 @@
+golang = type:str parent:golang auto
