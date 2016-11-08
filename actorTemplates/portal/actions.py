@@ -7,6 +7,13 @@ def install(job):
     from JumpScale.baselib.atyourservice81.AtYourServiceBuild import build
 
     def build_func(cuisine):
+        # remove previous code if any
+        to_clean = ['$appDir/portals/', '$jsLibDir/portal']
+        for path in to_clean:
+            if cuisine.core.file_exists(path):
+                cuisine.core.dir_remove(path)
+
+
         cuisine.apps.portal.install(start=False)
 
         # replace symbolic link with actual file
