@@ -7,6 +7,6 @@ def install(job):
     from JumpScale.baselib.atyourservice81.AtYourServiceBuild import build
 
     def build_func(cuisine):
-        cuisine.systemservices.g8osfs.build(start=False)
+        cuisine.systemservices.g8osfs.build(start=False, reset=True)
 
     build(job.service, build_func)

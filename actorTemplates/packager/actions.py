@@ -22,9 +22,13 @@ def install(job):
         stor_cuisine = j.tools.cuisine.get(stor_exec)
         ### upload to stor
         sp = stor_cuisine.tools.stor.getStorageSpace('{namespace}')
-        sp.upload('test', source='{source}')
-        """.format(store_addr=service.model.data.storeAddr, namespace=service.model.data.namespace, source=service.model.data.sandboxPath)
-        import ipdb; ipdb.set_trace()
+        sp.upload('{flist}', source='{source}')
+        """.format(
+            store_addr=service.model.data.storeAddr,
+            namespace=service.model.data.namespace,
+            source=service.model.data.sandboxPath,
+            flist=service.model.data.flistName)
+
         cuisine.core.execute_jumpscript(upload)
 
     build(job.service, build_func)

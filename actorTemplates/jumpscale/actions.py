@@ -8,6 +8,7 @@ def install(job):
     service = job.service
 
     def build_func(cuisine):
+        cuisine.core.dir_remove('$codeDir/github/jumpscale/jumpscale_core8')
         cuisine.development.js8.install(deps=False, keep=True, reset=True, branch=service.model.data.branch)
 
 

@@ -1,0 +1,99 @@
+sshkey__main:
+    key.path: '/root/.ssh/id_rsa'
+
+# This nod can be replace by any type of service with the role 'node'
+node.physical__builder:
+    ip.public: '0.0.0.0'
+    ssh.login: 'root'
+    sshkey: main
+
+app_docker__builder:
+    'os' : builder
+
+# simple binaries without dependencies
+mongodb__main:
+    builder_host: 'builder'
+influxdb__main:
+    builder_host: 'builder'
+redis__main:
+    builder_host: 'builder'
+grafana__main:
+    builder_host: 'builder'
+caddy__main:
+    builder_host: 'builder'
+shellinabox__main:
+    builder_host: 'builder'
+
+# Python tree
+python__main:
+    builder_host: 'builder'
+jumpscale__main:
+    python: 'main'
+    branch: 'main'
+portal__main:
+    jumpscale: 'main'
+cockpit__main:
+    jumpscale: 'main'
+
+
+# golang tree
+golang__main:
+    builder_host: 'builder'
+fs__main:
+    golang: 'main'
+store__main:
+    golang: 'main'
+syncthing__main:
+    golang: 'main'
+core__main:
+    golang: 'main'
+controller__main:
+    golang: 'main'
+geodns__main:
+    golang: 'main'
+tidb__main:
+    golang: 'main'
+
+# nodejs tree
+nodejs__main:
+    builder_host: 'builder'
+scality__main:
+    'nodejs': 'main'
+
+# web tree
+nginx__main:
+    builder_host: 'builder'
+php__main:
+    nginx: 'main'
+owncloud__main:
+    php: 'main'
+
+
+sshkey__store:
+    # this key need to be authorized on our store
+    key.path: '/root/.ssh/stor_rsa'
+
+packager__main:
+    store_addr: 'stor.jumpscale.org'
+    store_sshkey: 'store'
+    builder_host: 'builder'
+    sandbox_path: '/opt'
+    namespace: 'aysbuild'
+
+    jumpscale: 'main'
+    cockpit: 'main'
+    portal: 'main'
+    fs: 'main'
+    store: 'main'
+    syncthing: 'main'
+    core: 'main'
+    controller: 'main'
+    geodns: 'main'
+    tidb: 'main'
+    scality: 'main'
+    mongodb: 'main'
+    redis: 'main'
+    grafana: 'main'
+    caddy: 'main'
+    shellinabox: 'main'
+    owncloud: 'main'
