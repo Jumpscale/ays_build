@@ -18,7 +18,7 @@ def install(job):
         for directory in directories:
             links = cuisine.core.fs_find(directory, type='l')
             for link in links:
-                if link in skip:
+                if j.sal.fs.getBaseName(link) in skip:
                     continue
                 _, dest, _ = cuisine.core.run('readlink {}'.format(link), showout=False)
                 cuisine.core.run('rm {link}; cp -rv {dest} {link}'.format(link=link, dest=dest))
