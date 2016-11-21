@@ -32,3 +32,20 @@ def install(job):
         cuisine.core.execute_jumpscript(upload)
 
     build(job.service, build_func)
+
+
+def processChange(job):
+    service = job.service
+    args = job.model.args
+
+    try:
+        change_category = args.pop('changeCategory')
+    except KeyError:
+        # changeCategory not in args. we can't decide what to do
+        return
+
+    if change_category == 'dataschema':
+        for key, value in args.items():
+            capnp_key = j.data.hrd.sanitize_key(key)
+            setattr(service.model.data, capnp_key, value)
+        service.saveAll()
