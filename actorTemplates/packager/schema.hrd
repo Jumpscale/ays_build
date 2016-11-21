@@ -1,21 +1,21 @@
 jumpscale       = type:str parent:jumpscale auto
 
-cockpit         = type:str consume:cockpit:1:1 auto
-portal          = type:str consume:portal:1:1 auto
-fs              = type:str consume:fs:1:1 auto
-store           = type:str consume:store:1:1 auto
-syncthing       = type:str consume:syncthing:1:1 auto
-core            = type:str consume:core:1:1 auto
-controller      = type:str consume:controller:1:1 auto
-geodns          = type:str consume:core:1:1 auto
-tidb            = type:str consume:tidb:1:1 auto
-scality         = type:str consume:scality:1:1 auto
-mongodb         = type:str consume:mongodb:1:1 auto
-redis           = type:str consume:redis:1:1 auto
-grafana         = type:str consume:grafana:1:1 auto
-caddy           = type:str consume:caddy:1:1 auto
-shellinabox     = type:str consume:shellinabox:1:1 auto
-owncloud        = type:str consume:owncloud:1:1 auto
+cockpit         = type:str consume:cockpit:0:1 
+portal          = type:str consume:portal:0:1 
+fs              = type:str consume:fs:0:1 
+store           = type:str consume:store:0:1 
+syncthing       = type:str consume:syncthing:0:1 
+core            = type:str consume:golang:0:1
+controller      = type:str consume:controller:0:1 
+geodns          = type:str consume:golang:0:1 
+tidb            = type:str consume:tidb:0:1 
+scality         = type:str consume:scality:0:1 
+mongodb         = type:str consume:mongodb:0:1
+redis           = type:str consume:redis:0:1 
+grafana         = type:str consume:grafana:0:1 
+caddy           = type:str consume:caddy:0:1 
+shellinabox     = type:str consume:shellinabox:0:1 
+owncloud        = type:str consume:owncloud:0:1 
 
 builder_host = type:str consume:os:1
 store_sshkey = type:str consume:sshkey:1:1
