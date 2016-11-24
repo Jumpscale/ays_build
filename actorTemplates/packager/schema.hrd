@@ -1,26 +1,26 @@
 jumpscale       = type:str parent:jumpscale auto
 
-cockpit         = type:str consume:cockpit:0:1 
-portal          = type:str consume:portal:0:1 
-fs              = type:str consume:fs:0:1 
-store           = type:str consume:store:0:1 
-syncthing       = type:str consume:syncthing:0:1 
+cockpit         = type:str consume:cockpit:0:1
+portal          = type:str consume:portal:0:1
+fs              = type:str consume:fs:0:1
+store           = type:str consume:store:0:1
+syncthing       = type:str consume:syncthing:0:1
 core            = type:str consume:golang:0:1
-controller      = type:str consume:controller:0:1 
-geodns          = type:str consume:golang:0:1 
-tidb            = type:str consume:tidb:0:1 
-scality         = type:str consume:scality:0:1 
+controller      = type:str consume:controller:0:1
+geodns          = type:str consume:golang:0:1
+tidb            = type:str consume:tidb:0:1
+scality         = type:str consume:scality:0:1
 mongodb         = type:str consume:mongodb:0:1
-redis           = type:str consume:redis:0:1 
-grafana         = type:str consume:grafana:0:1 
-caddy           = type:str consume:caddy:0:1 
-shellinabox     = type:str consume:shellinabox:0:1 
-owncloud        = type:str consume:owncloud:0:1 
+influxdb        = type:str consume:influxdb:0:1
+redis           = type:str consume:redis:0:1
+grafana         = type:str consume:grafana:0:1
+caddy           = type:str consume:caddy:0:1
+shellinabox     = type:str consume:shellinabox:0:1
+owncloud        = type:str consume:owncloud:0:1
 
 builder_host = type:str consume:os:1
-store_sshkey = type:str consume:sshkey:1:1
 
 sandbox_path = type:str default:'/mnt/building'
-store_addr = type:str default:'stor.jumpscale.org'
-namespace = type:str
 flist_name = type:str default:'jumpscale'
+
+flist_url = type:str

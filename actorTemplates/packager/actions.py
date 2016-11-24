@@ -11,25 +11,42 @@ def install(job):
 
         cuisine.tools.sandbox.cleanup()
 
-        sshkey = service.producers['sshkey'][0]
-        cuisine.core.file_write("/root/.ssh/store_rsa", sshkey.model.data.keyPriv)
-        cuisine.core.file_attribs('/root/.ssh/store_rsa', mode='0600')
+        cuisine.apps.ipfs.install(reset=Flase)
+        cuisine.apps.ipfs.start(name='main')
 
         upload = r"""
         from JumpScale import j
-        j.do.loadSSHKeys('/root/.ssh/store_rsa')
-        stor_exec = j.tools.executor.getSSHBased('{store_addr}')
-        stor_cuisine = j.tools.cuisine.get(stor_exec)
-        ### upload to stor
-        sp = stor_cuisine.tools.stor.getStorageSpace('{namespace}')
-        sp.upload('{flist}', source='{source}', excludes=['/__pycache__/', '(.*)\\.pyc$', '^\/opt\/code.*'])
+        source = '{source}'
+        outlist = "/tmp/{flist}"
+        backend = '/mnt/flist_upload'
+        flist = j.tools.flist.get_flist()
+        archiver = j.tools.flist.get_archiver()
+
+        n = flist.build(source, excludes=['/__pycache__/', '(.*)\\.pyc$', '^\/opt\/code.*'])
+        print("%d items added" % n)
+
+        archiver.build(flist, backend)
+
+        data = flist.dumps(source)
+
+        with open(outlist, "w") as output:
+            output.write(data)
+
+        final = archiver.push_to_ipfs(outlist)
+        flist_url = "https://ipfs.io/ipfs/%s" % final
+        print(flist_url)
         """.format(
-            store_addr=service.model.data.storeAddr,
-            namespace=service.model.data.namespace,
             source=service.model.data.sandboxPath,
             flist=service.model.data.flistName)
 
-        cuisine.core.execute_jumpscript(upload)
+        rc, out = cuisine.core.execute_jumpscript(upload)
+        if rc == 0:
+            flist_url = out.strip().splitlines()[0]
+            print("flist url : %s" % flist_url)
+            service.model.data.flistURL = flist_url
+            service.saveAll()
+        else:
+            raise j.exceptions.RuntimeError("Error during sandboxing: %s" % out)
 
     build(job.service, build_func)
 
