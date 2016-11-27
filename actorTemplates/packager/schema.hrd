@@ -2,6 +2,7 @@ jumpscale       = type:str parent:jumpscale auto
 
 cockpit         = type:str consume:cockpit:0:1 
 portal          = type:str consume:portal:0:1 
+aysbot          = type:str consume:aysbot:0:1 
 fs              = type:str consume:fs:0:1 
 store           = type:str consume:store:0:1 
 syncthing       = type:str consume:syncthing:0:1 
