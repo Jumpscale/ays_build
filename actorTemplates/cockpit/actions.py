@@ -6,8 +6,11 @@ def init(job):
 def install(job):
     from JumpScale.baselib.atyourservice81.AtYourServiceBuild import build
     service = job.service
-    
+
     def build_func(cuisine):
+        if cuisine.core.dir_exists('$appDir/ays_api'):
+            cuisine.core.dir_remove('$appDir/ays_api')
+
         cuisine.solutions.cockpit.install(start=False, branch=service.model.data.branch)
 
         # replace symbolic link with actual file
