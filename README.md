@@ -5,9 +5,9 @@ Small tutorial on how to setup an AYS repository to build JumpScale sandbox
 ```bash
 # clone repo that contains actor templates for builds
 cd /opt/code/github/jumpscale
-git clone https://github.com/Jumpscale/ays_build.git
+git clone git@github.com:Jumpscale/ays_build.git
 # create your AYS building repo
-ays create_repo -p /path/to/build/repo -g http://github.com/account/repo
+ays create_repo -p /opt/code/github/despiegk/ays_build_jumpscale -g git@github.com:despiegk/ays_build_jumpscale.git
 cd /path/to/build/repo
 # link the templates in the repo.
 ln -s /opt/code/github/jumpscale/ays_build/actorTemplates/* actorTemplates/
