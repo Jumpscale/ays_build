@@ -20,7 +20,8 @@ cd  $myAysRepoPath
 ln -s /opt/code/github/jumpscale/ays_build/actorTemplates/* actorTemplates/
 
 # copy the blueprint into your repo
-curl https://raw.githubusercontent.com/Jumpscale/ays_build/master/blueprint/01_build.yaml > blueprints/01_build.yaml
+mkdir -p blueprints
+rsync -rav /opt/code/github/jumpscale/ays_build/blueprints/ blueprints/
 
 # fill the blueprint to define which build host you want to use.
 vim blueprints/01_build.yaml
