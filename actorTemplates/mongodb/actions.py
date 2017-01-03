@@ -7,6 +7,6 @@ def install(job):
     from JumpScale.baselib.atyourservice81.AtYourServiceBuild import build
 
     def build_func(cuisine):
-        cuisine.apps.mongodb.build(start=False)
+        cuisine.apps.mongodb.install(start=False)
 
     build(job.service, build_func)
