@@ -13,13 +13,13 @@ def install(job):
             if cuisine.core.file_exists(path):
                 cuisine.core.dir_remove(path)
 
-        cuisine.apps.portal.install(start=False, installdeps=True, branch=service.model.data.branch)
+        cuisine.apps.portal.install(start=False, reset=True, branch=service.model.data.branch)
 
         # replace symbolic link with actual file
-        directories = [cuisine.core.dir_paths['binDir'], cuisine.core.dir_paths['libDir'], cuisine.core.args_replace('$appDir/portals')]
+        directories = [cuisine.core.dir_paths['binDir'], cuisine.core.dir_paths['libDir'], cuisine.core.replace('$appDir/portals')]
         skip = ['npm']
         for directory in directories:
-            links = cuisine.core.fs_find(directory, type='l')
+            links = cuisine.core.find(directory, type='l')
             for link in links:
                 if j.sal.fs.getBaseName(link) in skip:
                     continue

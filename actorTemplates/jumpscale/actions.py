@@ -11,12 +11,11 @@ def install(job):
         cuisine.core.dir_remove('$codeDir/github/jumpscale/jumpscale_core8')
         cuisine.development.js8.install(deps=False, keep=True, reset=True, branch=service.model.data.branch)
 
-
         # replace symbolic link with actual file
-        directories = [cuisine.core.dir_paths['binDir'], cuisine.core.dir_paths['libDir']]
+        directories = [cuisine.core.dir_paths['BINDIR'], cuisine.core.dir_paths['LIBDIR']]
         skip = ['npm']
         for directory in directories:
-            links = cuisine.core.fs_find(directory, type='l')
+            links = cuisine.core.find(directory, type='l')
             for link in links:
                 if j.sal.fs.getBaseName(link) in skip:
                     continue
@@ -25,8 +24,8 @@ def install(job):
 
         # copy binaries that are left on the system into the sandbox
         jspython_path = cuisine.core.command_location('jspython')
-        if cuisine.core.file_exists('$binDir/jspython'):
-            cuisine.core.file_unlink('$binDir/jspython')
+        if cuisine.core.file_exists('$BINDIR/jspython'):
+            cuisine.core.file_unlink('$BINDIR/jspython')
         cuisine.core.file_copy(jspython_path, '$binDir/jspython')
         script = r"""cd /opt/jumpscale8/bin
     cp /usr/local/bin/bro .
@@ -52,7 +51,7 @@ def install(job):
         paths.append("/usr/lib/python3/dist-packages")
         paths.append("/usr/lib/python3.5/")
         paths.append("/usr/local/lib/python3.5/dist-packages")
-        base_dir = j.tools.cuisine.local.core.dir_paths['base']
+        base_dir = j.tools.cuisine.local.core.dir_paths['BASEDIR']
         dest = j.sal.fs.joinPaths(base_dir, 'lib')
         excludeFileRegex = ["-tk/", "/lib2to3", "-34m-", ".egg-info", "lsb_release"]
         excludeDirRegex = ["/JumpScale", "\.dist-info", "config-x86_64-linux-gnu", "pygtk"]

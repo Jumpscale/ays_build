@@ -9,6 +9,6 @@ def install(job):
     def build_func(cuisine):
         cuisine.package.mdupdate()
         cuisine.development.python.install()
-        cuisine.development.js8.installDeps()
+        # cuisine.development.js8.installDeps()
 
     build(job.service, build_func)

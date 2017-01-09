@@ -14,9 +14,9 @@ def install(job):
         cuisine.solutions.cockpit.install(start=False, branch=service.model.data.branch)
 
         # replace symbolic link with actual file
-        directories = [cuisine.core.args_replace('$appDir/ays_api/api_server'), cuisine.core.args_replace('$appDir/ays_api/ays_api')]
+        directories = [cuisine.core.replace('$appDir/ays_api/api_server'), cuisine.core.replace('$appDir/ays_api/ays_api')]
         for directory in directories:
-            links = cuisine.core.fs_find(directory, type='l')
+            links = cuisine.core.find(directory, type='l')
             for link in links:
                 _, dest, _ = cuisine.core.run('readlink {}'.format(link), showout=False)
                 cuisine.core.run('rm {link}; cp -rv {dest} {link}'.format(link=link, dest=dest))

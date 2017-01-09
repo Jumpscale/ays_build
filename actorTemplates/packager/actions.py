@@ -34,6 +34,22 @@ def install(job):
     build(job.service, build_func)
 
 
+def clean(job):
+    # look for build host os service
+    builder_host = None
+    service = job.service
+    for parent in service.parents:
+        if parent.model.role == 'os':
+            builder_host = parent
+            break
+    else:
+        raise j.exceptions.AYSNotFound("Can't find builder host os service")
+
+    cuisine = builder_host.executor.cuisine
+    cuisine.core.dir_remove('/mnt/building/opt')
+    cuisine.core.execute_bash('docker rm -f packager cockpit portal jumpscale scality geodns php fs grafana python nodejs mongodb golang nginx shellinabox caddy influxdb redis')
+
+
 def processChange(job):
     service = job.service
     args = job.model.args
