@@ -15,7 +15,7 @@ def install(job):
         directories = [cuisine.core.dir_paths['BINDIR'], cuisine.core.dir_paths['LIBDIR']]
         skip = ['npm']
         for directory in directories:
-            links = cuisine.core.fs_find(directory, type='l')
+            links = cuisine.core.find(directory, type='l')
             for link in links:
                 if j.sal.fs.getBaseName(link) in skip:
                     continue
