@@ -8,6 +8,6 @@ def install(job):
 
     def build_func(cuisine):
         cuisine.development.rust.install()
-        cuisine.apps.tidb.build(install=True, start=False)
+        cuisine.apps.tidb.build(install=True)
 
     build(job.service, build_func)
