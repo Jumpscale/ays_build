@@ -1,0 +1,10 @@
+links:
+    parent:
+        role: php
+        auto: True
+        optional: False
+
+
+doc:
+    properties:
+        - php: ''

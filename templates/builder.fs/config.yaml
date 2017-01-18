@@ -1,0 +1,10 @@
+links:
+    parent:
+        role: golang
+        auto: False
+        optional: False
+
+
+doc:
+    properties:
+        - golang: ''

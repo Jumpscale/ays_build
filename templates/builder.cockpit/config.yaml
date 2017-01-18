@@ -1,0 +1,40 @@
+links:
+    parent:
+        role: jumpscale
+        auto: True
+        optional: False
+
+
+    consume:
+        -   role: redis
+            argname: redis
+            auto: True
+            min: 1
+            max: 1
+
+        -   role: redis
+            argname: redis
+            auto: True
+            min: 1
+            max: 1
+
+        -   role: redis
+            argname: redis
+            auto: True
+            min: 1
+            max: 1
+
+        -   role: redis
+            argname: redis
+            auto: True
+            min: 1
+            max: 1
+
+doc:
+    properties:
+        - redis: ''
+        - caddy: ''
+        - shellinabox: ''
+        - portal: ''
+        - jumpscale: ''
+        - branch: ''

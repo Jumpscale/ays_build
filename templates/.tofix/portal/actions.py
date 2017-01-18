@@ -23,7 +23,7 @@ def install(job):
             for link in links:
                 if j.sal.fs.getBaseName(link) in skip:
                     continue
-                _, dest, _ = cuisine.core.run('readlink {}'.format(link))
+                _, dest, _ = cuisine.core.run('readLink {}'.format(link))
                 cuisine.core.run('rm {link}; cp -vr {dest} {link}'.format(link=link, dest=dest))
 
         js_script = r"""
