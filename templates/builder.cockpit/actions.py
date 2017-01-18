@@ -8,17 +8,17 @@ def install(job):
     service = job.service
 
     def build_func(cuisine):
-        if cuisine.core.dir_exists('$appDir/ays_api'):
-            cuisine.core.dir_remove('$appDir/ays_api')
+        if cuisine.core.dir_exists('$JSAPPSDIR/ays_api'):
+            cuisine.core.dir_remove('$JSAPPSDIR/ays_api')
 
         cuisine.solutions.cockpit.install(start=False, branch=service.model.data.branch)
 
         # replace symbolic link with actual file
-        directories = [cuisine.core.replace('$appDir/ays_api/api_server'), cuisine.core.replace('$appDir/ays_api/ays_api')]
+        directories = [cuisine.core.replace('$JSAPPSDIR/ays_api/api_server'), cuisine.core.replace('$JSAPPSDIR/ays_api/ays_api')]
         for directory in directories:
             links = cuisine.core.find(directory, type='l')
             for link in links:
-                _, dest, _ = cuisine.core.run('readLink {}'.format(link), showout=False)
+                _, dest, _ = cuisine.core.run('readlink -f {}'.format(link), showout=False)
                 cuisine.core.run('rm {link}; cp -rv {dest} {link}'.format(link=link, dest=dest))
 
         js_script = r"""
@@ -27,7 +27,7 @@ def install(job):
         paths.append("/usr/lib/python3/dist-packages")
         paths.append("/usr/lib/python3.5/")
         paths.append("/usr/local/lib/python3.5/dist-packages")
-        base_dir = j.tools.cuisine.local.core.dir_paths['base']
+        base_dir = j.tools.cuisine.local.core.dir_paths['JSBASEDIR']
         dest = j.sal.fs.joinPaths(base_dir, 'lib')
         excludeFileRegex = ["-tk/", "/lib2to3", "-34m-", ".egg-info", "lsb_release"]
         excludeDirRegex = ["/JumpScale", "\.dist-info", "config-x86_64-linux-gnu", "pygtk"]

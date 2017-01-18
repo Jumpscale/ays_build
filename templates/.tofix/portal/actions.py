@@ -8,7 +8,7 @@ def install(job):
     service = job.service
     def build_func(cuisine):
         # remove previous code if any
-        to_clean = ['$appDir/portals/', '$jsLibDir/portal']
+        to_clean = ['$JSAPPSDIR/portals/', '$JSLIBDIR/portal']
         for path in to_clean:
             if cuisine.core.file_exists(path):
                 cuisine.core.dir_remove(path)
@@ -16,15 +16,15 @@ def install(job):
         cuisine.apps.portal.install(start=False, reset=True, branch=service.model.data.branch)
 
         # replace symbolic link with actual file
-        directories = [cuisine.core.dir_paths['binDir'], cuisine.core.dir_paths['libDir'], cuisine.core.replace('$appDir/portals')]
+        directories = [cuisine.core.dir_paths['BINDIR'], cuisine.core.dir_paths['LIBDIR'], cuisine.core.replace('$JSAPPSDIR/portals')]
         skip = ['npm']
         for directory in directories:
             links = cuisine.core.find(directory, type='l')
             for link in links:
                 if j.sal.fs.getBaseName(link) in skip:
                     continue
-                _, dest, _ = cuisine.core.run('readLink {}'.format(link))
-                cuisine.core.run('rm {link}; cp -vr {dest} {link}'.format(link=link, dest=dest))
+                _, dest, _ = cuisine.core.run('readlink -f {}'.format(link), profile=True)
+                cuisine.core.run('rm {link}; cp -vr {dest} {link}'.format(link=link, dest=dest), profile=True)
 
         js_script = r"""
         from JumpScale import j
@@ -32,7 +32,7 @@ def install(job):
         paths.append("/usr/lib/python3/dist-packages")
         paths.append("/usr/lib/python3.5/")
         paths.append("/usr/local/lib/python3.5/dist-packages")
-        base_dir = j.tools.cuisine.local.core.dir_paths['base']
+        base_dir = j.tools.cuisine.local.core.dir_paths['JSBASEDIR']
         dest = j.sal.fs.joinPaths(base_dir, 'lib')
         excludeFileRegex = ["-tk/", "/lib2to3", "-34m-", ".egg-info", "lsb_release"]
         excludeDirRegex = ["/JumpScale", "\.dist-info", "config-x86_64-linux-gnu", "pygtk"]
