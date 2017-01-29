@@ -7,6 +7,6 @@ def install(job):
     from JumpScale.baselib.atyourservice81.AtYourServiceBuild import build
 
     def build_func(cuisine):
-        cuisine.apps.nodejs.install()
+        cuisine.apps.nodejs.install(reset=True)
 
     build(job.service, build_func)
