@@ -1,0 +1,114 @@
+sshkey__john:
+    key.path: '/root/.ssh/id_rsa'
+# The params values of g8client and vdc and node.ovc will be passed acc. to the vm location
+g8client__main:
+    url: 'du-conv-2.demo.greenitglobe.com'
+    login: 'john'
+    password: 'gig12345'
+    account: 'johnacc'
+
+vdc__johncs3:
+    g8client: 'main'
+    description: 'desc'
+    location: 'du-conv-2'
+
+node.ovc__builder:
+    os.image: 'Ubuntu 16.04 x64'
+    bootdisk.size: 10
+    sizeID: 4
+    vdc: 'johncs3'
+    sshkey: 'main'
+
+test_ays_build_clean__tsclean:
+    os: 'builder'
+
+app_docker__builder:
+    os : 'builder'
+    # This clean is not there for now.. till we find a sol.
+    clean: 'tsclean'
+
+# simple binaries without dependencies
+# These docker services should be dependent on app_docker.. issue:# 
+mongodb__main:
+    builder_host: 'builder'
+influxdb__main:
+    builder_host: 'builder'
+redis__main:
+    builder_host: 'builder'
+grafana__main:
+    builder_host: 'builder'
+caddy__main:
+    builder_host: 'builder'
+shellinabox__main:
+    builder_host: 'builder'
+
+# # Python tree
+python__main:
+    builder_host: 'builder'
+jumpscale__main:
+    python: 'main'
+    branch: 'master'
+portal__main:
+    jumpscale: 'main'
+cockpit__main:
+    jumpscale: 'main'
+
+
+# # golang tree
+golang__main:
+    builder_host: 'builder'
+fs__main:
+    golang: 'main'
+geodns__main:
+    golang: 'main'
+tidb__main:
+    golang: 'main'
+
+# nodejs tree
+nodejs__main:
+    builder_host: 'builder'
+scality__main:
+    'nodejs': 'main'
+
+# web tree
+nginx__main:
+    builder_host: 'builder'
+php__main:
+    nginx: 'main'
+owncloud__main:
+    php: 'main'
+
+
+sshkey__store:
+    key.path: '/root/.ssh/stor_rsa'
+
+packager__main:
+    store_addr: 'stor.jumpscale.org'
+    store_sshkey: 'store'
+    builder_host: 'builder'
+    sandbox_path: '/opt'
+    namespace: 'aysbuild'
+    flist_name: 'john2_test'
+
+    jumpscale: 'main'
+    cockpit: 'main'
+    portal: 'main'
+    fs: 'main'
+    geodns: 'main'
+    tidb: 'main'
+    scality: 'main'
+    mongodb: 'main'
+    redis: 'main'
+    grafana: 'main'
+    caddy: 'main'
+    shellinabox: 'main'
+    owncloud: 'main'
+
+test_ays_build__ts:
+   packager: 'main'
+
+actions:
+   - action: 'install'
+   - action: 'test'
+     actor: 'test_ays_build'
+
