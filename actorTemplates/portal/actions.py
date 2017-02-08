@@ -13,7 +13,7 @@ def install(job):
             if cuisine.core.file_exists(path):
                 cuisine.core.dir_remove(path)
 
-        cuisine.apps.portal.install(start=False, reset=True, branch=service.model.data.branch)
+        cuisine.apps.portal.install(start=False, branch=service.model.data.branch)
 
         # replace symbolic link with actual file
         directories = [cuisine.core.dir_paths['BINDIR'], cuisine.core.dir_paths['LIBDIR'], cuisine.core.replace('$JSAPPSDIR/portals')]
