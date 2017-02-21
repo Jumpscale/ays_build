@@ -1,1 +1,1 @@
-php = type:str parent:php auto
+apache2 = type:str parent:apache2 auto
