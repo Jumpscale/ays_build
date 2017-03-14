@@ -1,0 +1,10 @@
+doc:
+  property:
+  - jumpscale: ''
+links:
+  parent:
+    auto: true
+    optional: false
+    role: jumpscale
+    argname: jumpscale
+recurring: []

@@ -1,0 +1,18 @@
+doc:
+  property:
+  - python: ''
+  - redis: ''
+  - branch: ''
+links:
+  consume:
+  - argname: redis
+    auto: true
+    max: '1'
+    min: '1'
+    role: redis
+  parent:
+    auto: true
+    optional: false
+    role: python
+    argname: python
+recurring: []

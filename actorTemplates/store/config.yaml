@@ -1,0 +1,10 @@
+doc:
+  property:
+  - golang: ''
+links:
+  parent:
+    auto: false
+    optional: false
+    role: golang
+    argname: golang
+recurring: []

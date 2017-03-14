@@ -1,0 +1,10 @@
+doc:
+  property:
+  - nginx: ''
+links:
+  parent:
+    auto: true
+    optional: false
+    role: nginx
+    argname:  nginx
+recurring: []

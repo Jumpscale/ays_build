@@ -1,0 +1,129 @@
+doc:
+  property:
+  - fs: ''
+  - storeSshkey: ''
+  - tidb: ''
+  - mongodb: ''
+  - cockpit: ''
+  - scality: ''
+  - core: ''
+  - builderHost: ''
+  - store: ''
+  - shellinabox: ''
+  - aysbot: ''
+  - flistName: ''
+  - portal: ''
+  - geodns: ''
+  - syncthing: ''
+  - controller: ''
+  - owncloud: ''
+  - sandboxPath: ''
+  - jumpscale: ''
+  - storeAddr: ''
+  - caddy: ''
+  - grafana: ''
+  - namespace: ''
+  - redis: ''
+links:
+  consume:
+  - argname: fs
+    auto: false
+    max: '1'
+    min: '0'
+    role: fs
+  - argname: storeSshkey
+    auto: false
+    max: '1'
+    min: '1'
+    role: sshkey
+  - argname: tidb
+    auto: false
+    max: '1'
+    min: '0'
+    role: tidb
+  - argname: mongodb
+    auto: false
+    max: '1'
+    min: '0'
+    role: mongodb
+  - argname: cockpit
+    auto: false
+    max: '1'
+    min: '0'
+    role: cockpit
+  - argname: scality
+    auto: false
+    max: '1'
+    min: '0'
+    role: scality
+  - argname: core
+    auto: false
+    max: '1'
+    min: '0'
+    role: golang
+  - argname: builderHost
+    auto: false
+    max: 100
+    min: '1'
+    role: os
+  - argname: store
+    auto: false
+    max: '1'
+    min: '0'
+    role: store
+  - argname: shellinabox
+    auto: false
+    max: '1'
+    min: '0'
+    role: shellinabox
+  - argname: aysbot
+    auto: false
+    max: '1'
+    min: '0'
+    role: aysbot
+  - argname: portal
+    auto: false
+    max: '1'
+    min: '0'
+    role: portal
+  - argname: geodns
+    auto: false
+    max: '1'
+    min: '0'
+    role: golang
+  - argname: syncthing
+    auto: false
+    max: '1'
+    min: '0'
+    role: syncthing
+  - argname: controller
+    auto: false
+    max: '1'
+    min: '0'
+    role: controller
+  - argname: owncloud
+    auto: false
+    max: '1'
+    min: '0'
+    role: owncloud
+  - argname: caddy
+    auto: false
+    max: '1'
+    min: '0'
+    role: caddy
+  - argname: grafana
+    auto: false
+    max: '1'
+    min: '0'
+    role: grafana
+  - argname: redis
+    auto: false
+    max: '1'
+    min: '0'
+    role: redis
+  parent:
+    auto: true
+    optional: false
+    role: jumpscale
+    argname: jumpscale
+recurring: []

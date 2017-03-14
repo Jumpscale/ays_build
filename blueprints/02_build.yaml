@@ -1,0 +1,101 @@
+sshkey__main2:
+    key.path: '/root/.ssh/ovh_rsa'
+    key.passphrase: 'gig007'
+
+
+node.packet.net__builder:
+    client: main
+    project.name: 'kdstest'
+    device.name: 'build_8.2.0'
+    device.os: 'Ubuntu 16.04 LTS'
+    ssh.login: 'root'
+    sshkey: main2
+
+
+os.ssh.ubuntu__builder:
+    node: 'builder'
+    sshkey: 'main2'
+
+app_docker__builder:
+    os : 'builder'
+
+# simple binaries without dependencies
+mongodb__main:
+    builderHost: 'builder'
+influxdb__main:
+    builderHost: 'builder'
+redis__main:
+    builderHost: 'builder'
+grafana__main:
+    builderHost: 'builder'
+caddy__main:
+    builderHost: 'builder'
+shellinabox__main:
+    builderHost: 'builder'
+
+# # Python tree
+python__main:
+    builderHost: 'builder'
+jumpscale__main:
+    python: 'main'
+    branch: '8.1.1'
+portal__main:
+    jumpscale: 'main'
+    branch: '8.1.1'
+cockpit__main:
+    jumpscale: 'main'
+    branch: '8.1.1'
+
+
+# # golang tree
+golang__main:
+    builderHost: 'builder'
+fs__main:
+    golang: 'main'
+geodns__main:
+    golang: 'main'
+tidb__main:
+    golang: 'main'
+
+# nodejs tree
+nodejs__main:
+    builderHost: 'builder'
+scality__main:
+    'nodejs': 'main'
+
+# # web tree
+# nginx__main:
+#     builderHost: 'builder'
+# php__main:
+#     nginx: 'main'
+# owncloud__main:
+#     php: 'main'
+
+
+sshkey__store:
+    key.path: '/root/.ssh/store_rsa'
+
+packager__main:
+    store_addr: 'stor.jumpscale.org'
+    store_sshkey: 'store'
+    builderHost: 'builder'
+    sandbox_path: '/opt'
+    namespace: 'aysbuild'
+    flist_name: 'test811_reem'
+
+    jumpscale: 'main'
+    cockpit: 'main'
+    portal: 'main'
+    fs: 'main'
+    geodns: 'main'
+    tidb: 'main'
+    scality: 'main'
+    mongodb: 'main'
+    redis: 'main'
+    grafana: 'main'
+    caddy: 'main'
+    shellinabox: 'main'
+    # owncloud: 'main'
+
+actions:
+    - action: install

@@ -1,0 +1,36 @@
+doc:
+  property:
+  - shellinabox: ''
+  - portal: ''
+  - branch: ''
+  - caddy: ''
+  - jumpscale: ''
+  - redis: ''
+links:
+  consume:
+  - argname: shellinabox
+    auto: true
+    max: '1'
+    min: '1'
+    role: shellinabox
+  - argname: portal
+    auto: true
+    max: '1'
+    min: '1'
+    role: portal
+  - argname: caddy
+    auto: true
+    max: '1'
+    min: '1'
+    role: caddy
+  - argname: redis
+    auto: true
+    max: '1'
+    min: '1'
+    role: redis
+  parent:
+    auto: true
+    optional: false
+    role: jumpscale
+    argname: jumpscale
+recurring: []

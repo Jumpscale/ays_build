@@ -1,3 +1,0 @@
-jumpscale = type:str parent:jumpscale auto
-mongodb = type:str consume:mongodb:1 auto
-branch = type:str default:'master'

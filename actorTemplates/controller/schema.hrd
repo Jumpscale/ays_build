@@ -1,2 +1,0 @@
-golang = type:str parent:golang auto
-syncthing = type:str consume:syncthing:1:1

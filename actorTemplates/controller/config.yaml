@@ -1,0 +1,16 @@
+doc:
+  property:
+  - golang: ''
+  - syncthing: ''
+links:
+  consume:
+  - argname: syncthing
+    auto: false
+    max: '1'
+    min: '1'
+    role: syncthing
+  parent:
+    auto: true
+    optional: false
+    role: golang
+recurring: []

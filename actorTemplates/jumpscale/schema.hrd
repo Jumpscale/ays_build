@@ -1,3 +1,0 @@
-python = type:str parent:python auto
-redis = type:str consume:redis:1:1 auto
-branch = type:str default:'master'

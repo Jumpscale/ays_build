@@ -1,0 +1,10 @@
+doc:
+  property:
+  - php: ''
+links:
+  parent:
+    auto: true
+    optional: false
+    role: php
+    argname: php
+recurring: []

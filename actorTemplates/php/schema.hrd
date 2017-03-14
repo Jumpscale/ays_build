@@ -1,1 +1,0 @@
-nginx = type:str parent:nginx auto
