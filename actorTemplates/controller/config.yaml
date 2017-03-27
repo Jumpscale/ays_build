@@ -13,4 +13,5 @@ links:
     auto: true
     optional: false
     role: golang
+    argname: golang
 recurring: []

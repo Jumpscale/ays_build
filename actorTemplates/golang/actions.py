@@ -8,7 +8,7 @@ def install(job):
 
     def build_func(cuisine):
         cuisine.package.ensure('git')
-        cuisine.development.golang.install()
+        cuisine.development.golang.install(reset=True)
         # cuisine.development.golang.install_godep()
 
     build(job.service, build_func)

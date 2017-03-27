@@ -1,7 +1,14 @@
 doc:
   property:
+  - docker: ''
   - builderHost: ''
 links:
+- consume:
+  - argname: docker
+    auto: True
+    max: '1'
+    min: '1'
+    role: app_docker
   parent:
     auto: false
     optional: false

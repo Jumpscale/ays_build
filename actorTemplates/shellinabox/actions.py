@@ -9,8 +9,8 @@ def install(job):
     def build_func(cuisine):
         cuisine.package.install('shellinabox')
         bin_path = cuisine.bash.cmdGetPath('shellinaboxd')
-        cuisine.core.dir_ensure('$binDir')
-        if bin_path != j.sal.fs.pathClean(cuisine.core.args_replace("$binDir/shellinaboxd")):
-            cuisine.core.file_copy(bin_path, "$binDir/shellinaboxd", overwrite=True)
+        cuisine.core.dir_ensure('$BINDIR')
+        if bin_path != j.sal.fs.pathClean(cuisine.core.replace("$BINDIR/shellinaboxd")):
+            cuisine.core.file_copy(bin_path, "$BINDIR/shellinaboxd", overwrite=True)
 
     build(job.service, build_func)

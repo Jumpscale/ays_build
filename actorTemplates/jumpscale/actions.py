@@ -8,8 +8,12 @@ def install(job):
     service = job.service
 
     def build_func(cuisine):
-        cuisine.core.dir_remove('$codeDir/github/jumpscale/jumpscale_core8')
-        cuisine.development.js8.install(deps=False, keep=True, reset=True, branch=service.model.data.branch)
+        cuisine.core.dir_remove('$CODEDIR/github/jumpscale/jumpscale_core8')
+        cuisine.development.js8.install(deps=True, keep=True, reset=True, branch=service.model.data.branch)
+        cuisine.apps.brotli.build()
+        cuisine.apps.brotli.install()
+        cuisine.development.lua.installLua51()
+        cuisine.development.lua.installLuaTarantool()
 
         # replace symbolic link with actual file
         directories = [cuisine.core.dir_paths['BINDIR'], cuisine.core.dir_paths['LIBDIR']]
@@ -26,7 +30,7 @@ def install(job):
         jspython_path = cuisine.core.command_location('jspython')
         if cuisine.core.file_exists('$BINDIR/jspython'):
             cuisine.core.file_unlink('$BINDIR/jspython')
-        cuisine.core.file_copy(jspython_path, '$binDir/jspython')
+        cuisine.core.file_copy(jspython_path, '$BINDIR/jspython')
         script = r"""cd /opt/jumpscale8/bin
     cp /usr/local/bin/bro .
     cp /usr/bin/tarantool* .
@@ -35,7 +39,7 @@ def install(job):
     cp /usr/local/lib/luarocks/rocks/lua-capnproto/0.1.3-1/bin/* .
     cp /usr/local/lib/luarocks/rocks/lua-cjson/2.1.0-1/bin/* .
     cp /usr/local/lib/libluajit-5.1.so .
-    cp /usr/local/lib/lua/5.1/* .
+    cp -rf /usr/local/lib/lua/5.1/* .
     rsync -rv /usr/local/share/lua/5.1/ /opt/jumpscale8/lib/lua/
     rsync -rv /usr/local/share/luajit-2.1.0-beta2/ /opt/jumpscale8/lib/lua/
     mkdir -p /opt/jumpscale8/lib/lua/luarocks/

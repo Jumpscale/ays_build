@@ -1,12 +1,16 @@
 sshkey__main2:
-    key.path: '/root/.ssh/ovh_rsa'
-    key.passphrase: 'gig007'
+    keyPath: '/root/.ssh/packet_twk'
+    keyPub: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwOaJ6lN+c77TrHt5jyZK+kjqIHpPenhoOZj39dWRYLYkKP/qntSc4suJPhatLQ4Cksg+1PKBx4XFCeGtskpS1XA/tgT2/J+Zw0u2fbHHwcJgU3Fg0qTp7QvAq8/mxfLbkgL0ncVd8BRGo+FhunGrMTdtTj5goiaLXHoxvQL+M8rdQvHg4AItxtJUJevHBr0KMkEZQ2knAFzzeIe6VQOoKEbQCkVj6aSsMam1b/rxh9UOiSLsWw39aV9w5U8b6suMxYonjmZLTMsxOysRP+BJz42kKO6MgOZBWYfKhPpgohsA0q8EGrTtDwg2DKKNgIURQDqwiLRkm+iF34VCDVs+P root@build'
+    # keyPassphrase: 'gig007'
 
+
+packetnet_client__main:
+  token: '9R9wbbWoK11yPxHn9zEhZw4NuYjTbWyH' # you can get it from your packet.net management portal
 
 node.packet.net__builder:
     client: main
     project.name: 'kdstest'
-    device.name: 'build_8.2.0'
+    device.name: 'build-8.2.0'
     device.os: 'Ubuntu 16.04 LTS'
     ssh.login: 'root'
     sshkey: main2
@@ -21,34 +25,42 @@ app_docker__builder:
 
 # simple binaries without dependencies
 mongodb__main:
+    docker: 'builder'
     builderHost: 'builder'
 influxdb__main:
+    docker: 'builder' 
     builderHost: 'builder'
 redis__main:
+    docker: 'builder'
     builderHost: 'builder'
 grafana__main:
+    docker: 'builder'
     builderHost: 'builder'
 caddy__main:
+    docker: 'builder'
     builderHost: 'builder'
 shellinabox__main:
+    docker: 'builder'
     builderHost: 'builder'
 
-# # Python tree
+# Python tree
 python__main:
+    docker: 'builder'
     builderHost: 'builder'
 jumpscale__main:
     python: 'main'
-    branch: '8.1.1'
+    branch: '8.2.0'
 portal__main:
     jumpscale: 'main'
-    branch: '8.1.1'
+    branch: '8.2.0'
 cockpit__main:
     jumpscale: 'main'
-    branch: '8.1.1'
+    branch: '8.2.0'
 
-
-# # golang tree
+##################################################### tmporary comment , please remove later, comment under here.
+#golang tree
 golang__main:
+    docker: 'builder'     
     builderHost: 'builder'
 fs__main:
     golang: 'main'
@@ -59,21 +71,23 @@ tidb__main:
 
 # nodejs tree
 nodejs__main:
+    docker: 'builder'
     builderHost: 'builder'
 scality__main:
     'nodejs': 'main'
 
-# # web tree
-# nginx__main:
-#     builderHost: 'builder'
-# php__main:
-#     nginx: 'main'
-# owncloud__main:
-#     php: 'main'
+# web tree
+nginx__main:
+    docker: 'builder'
+    builderHost: 'builder'
+php__main:
+    nginx: 'main'
+owncloud__main:
+    php: 'main'
 
 
 sshkey__store:
-    key.path: '/root/.ssh/store_rsa'
+    keyPath: '/root/.ssh/store_rsa'
 
 packager__main:
     store_addr: 'stor.jumpscale.org'
@@ -95,7 +109,7 @@ packager__main:
     grafana: 'main'
     caddy: 'main'
     shellinabox: 'main'
-    # owncloud: 'main'
-
+    owncloud: 'main'
+################################################################################### end of comment.
 actions:
     - action: install
