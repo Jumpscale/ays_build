@@ -9,10 +9,9 @@ def install(job):
 
     def build_func(cuisine):
         cuisine.core.dir_remove('$CODEDIR/github/jumpscale/jumpscale_core8')
-        cuisine.development.js8.install(deps=True, keep=True, reset=True, branch=service.model.data.branch)
+        cuisine.development.js8.install(deps=True, keep=True, reset=False, branch=service.model.data.branch)
         cuisine.apps.brotli.build()
         cuisine.apps.brotli.install()
-        cuisine.development.lua.installLua51()
         cuisine.development.lua.installLuaTarantool()
 
         # replace symbolic link with actual file

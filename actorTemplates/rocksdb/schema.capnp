@@ -1,5 +1,5 @@
 
-@0xe12d6d0eb5c70437;
+@0xf26a726200b116d2;
 struct Schema {
 	golang @0 :Text;
 

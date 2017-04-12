@@ -1,0 +1,10 @@
+doc:
+  property:
+  - rocksdb: ''
+links:
+  parent:
+    auto: false
+    optional: false
+    role: rocksdb
+    argname: rocksdb
+recurring: []

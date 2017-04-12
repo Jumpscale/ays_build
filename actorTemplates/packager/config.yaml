@@ -1,6 +1,6 @@
 doc:
   property:
-  - fs: ''
+  - g8ufs: ''
   - storeSshkey: ''
   - tidb: ''
   - mongodb: ''
@@ -26,11 +26,11 @@ doc:
   - redis: ''
 links:
   consume:
-  - argname: fs
+  - argname: g8ufs
     auto: false
     max: '1'
     min: '0'
-    role: fs
+    role: g8ufs
   - argname: storeSshkey
     auto: false
     max: '1'

@@ -8,13 +8,10 @@ def install(job):
     service = job.service
 
     def build_func(cuisine):
-        if cuisine.core.dir_exists('$JSAPPSDIR/ays_api'):
-            cuisine.core.dir_remove('$JSAPPSDIR/ays_api')
-
-        cuisine.solutions.cockpit.install(start=False, branch=service.model.data.branch)
+        cuisine.solutions.cockpit.install(start=False, branch=service.model.data.branch, production=False)
 
         # replace symbolic link with actual file
-        directories = [cuisine.core.replace('$JSAPPSDIR/ays_api/api_server'), cuisine.core.replace('$JSAPPSDIR/ays_api/ays_api')]
+        directories = [cuisine.core.replace('$JSAPPSDIR/atyourservice'), cuisine.core.replace('$JSAPPSDIR/portals/')]
         for directory in directories:
             links = cuisine.core.find(directory, type='l')
             for link in links:

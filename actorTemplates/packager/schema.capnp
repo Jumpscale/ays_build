@@ -5,7 +5,7 @@ struct Schema {
 	cockpit @1 :Text;
 	portal @2 :Text;
 	aysbot @3 :Text;
-	fs @4 :Text;
+	g8ufs @4 :Text;
 	store @5 :Text;
 	syncthing @6 :Text;
 	core @7 :Text;

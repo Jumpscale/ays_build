@@ -1,14 +1,12 @@
 def init(job):
     from JumpScale.baselib.atyourservice81.lib.AtYourServiceBuild import ensure_container
-    ensure_container(job.service, root=True)
+    ensure_container(job.service, root=False)
 
 
 def install(job):
     from JumpScale.baselib.atyourservice81.lib.AtYourServiceBuild import build
 
     def build_func(cuisine):
-        cuisine.package.ensure('git')
-        cuisine.development.golang.install()
-        # cuisine.development.golang.install_godep()
+        cuisine.systemservices.g8osufs.build(start=False, reset=True)
 
     build(job.service, build_func)

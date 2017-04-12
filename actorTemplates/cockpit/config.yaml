@@ -13,11 +13,6 @@ links:
     max: '1'
     min: '1'
     role: shellinabox
-  - argname: portal
-    auto: true
-    max: '1'
-    min: '1'
-    role: portal
   - argname: caddy
     auto: true
     max: '1'
