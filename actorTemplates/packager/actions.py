@@ -5,31 +5,28 @@ def init(job):
 
 def install(job):
     from JumpScale.baselib.atyourservice81.lib.AtYourServiceBuild import build
+    import requests
 
     def build_func(cuisine):
         service = job.service
 
         cuisine.tools.sandbox.cleanup()
 
-        sshkey = service.producers['sshkey'][0]
-        cuisine.core.file_write("/root/.ssh/store_rsa", sshkey.model.data.keyPriv)
-        cuisine.core.file_attribs('/root/.ssh/store_rsa', mode='0600')
-
-        upload = r"""
-        from JumpScale import j
-        j.do.loadSSHKeys('/root/.ssh/store_rsa')
-        stor_exec = j.tools.executor.getSSHBased('{store_addr}')
-        stor_cuisine = j.tools.cuisine.get(stor_exec)
-        ### upload to stor
-        sp = stor_cuisine.tools.stor.getStorageSpace('{namespace}')
-        sp.upload('{flist}', source='{source}', excludes=['/__pycache__/', '(.*)\\.pyc$', '^\/opt\/code.*'])
-        """.format(
-            store_addr=service.model.data.storeAddr,
-            namespace=service.model.data.namespace,
-            source=service.model.data.sandboxPath,
-            flist=service.model.data.flistName)
-
-        cuisine.core.execute_jumpscript(upload)
+        tarpath = '/tmp/%s.tar.gz' % service.model.data.flistName
+        # To mount the flist: sudo g8ufs -meta /tmp/meta/ -storage-url ardb://hub.gig.tech:16379 /mnt/
+        # meta is the extracted flist path last parameter is the location of the moutpoint in our case /opt
+        cuisine.core.run('cd %s tar -zcf %s .' % (service.model.data.sandboxPath, tarpath))
+        clientid = service.model.data.clientId
+        clientsecret = service.model.data.clientSecret
+        response = requests.post('https://itsyou.online/v1/oauth/access_token?grant_type=client_credentials&client_id=%s&client_secret=%s&response_type=id_token' % (clientid, clientsecret))
+        jwt = response.content.decode('utf-8')
+        authorization = {'Authorization': 'bearer %s' % jwt}
+        script = """
+        import requests
+        files = {'file': open('%s', 'rb')}
+        requests.post('https://hub.gig.tech/upload', files=files, headers=%s)
+        """ % (tarpath, authorization)
+        cuisine.core.execute_python(script)
 
     build(job.service, build_func)
 

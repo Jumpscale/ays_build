@@ -25,5 +25,7 @@ struct Schema {
 	storeAddr @21 :Text = "stor.jumpscale.org";
 	namespace @22 :Text;
 	flistName @23 :Text = "jumpscale";
+	clientId @24 :Text;
+	clientSecret @25 :Text;
 
 }

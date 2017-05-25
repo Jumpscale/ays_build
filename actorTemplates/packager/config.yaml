@@ -24,6 +24,8 @@ doc:
   - grafana: ''
   - namespace: ''
   - redis: ''
+  - clientId: ''
+  - clientSecret: ''
 links:
   consume:
   - argname: g8ufs

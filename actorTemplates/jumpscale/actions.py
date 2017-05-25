@@ -9,6 +9,7 @@ def install(job):
 
     def build_func(cuisine):
         cuisine.core.dir_remove('$CODEDIR/github/jumpscale/jumpscale_core8')
+        cuisine.package.mdupdate()
         cuisine.development.js8.install(deps=True, keep=True, reset=False, branch=service.model.data.branch)
         cuisine.apps.brotli.build()
         cuisine.apps.brotli.install()
@@ -40,7 +41,7 @@ def install(job):
     cp /usr/local/lib/libluajit-5.1.so .
     cp -rf /usr/local/lib/lua/5.1/* .
     rsync -rv /usr/local/share/lua/5.1/ /opt/jumpscale8/lib/lua/
-    rsync -rv /usr/local/share/luajit-2.1.0-beta2/ /opt/jumpscale8/lib/lua/
+    rsync -rv /usr/local/share/luajit-2.1.0-beta3/ /opt/jumpscale8/lib/lua/
     mkdir -p /opt/jumpscale8/lib/lua/luarocks/
     rsync -rv /usr/share/lua/5.1/luarocks/ /opt/jumpscale8/lib/lua/luarocks/
     mkdir -p /opt/jumpscale8/lib/lua/tarantool/
